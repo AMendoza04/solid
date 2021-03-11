@@ -1,8 +1,8 @@
 package com.webDevelopment.solid.controllers;
 
 import com.webDevelopment.solid.models.Book;
+import com.webDevelopment.solid.services.BookService;
 import com.webDevelopment.solid.useCases.BookCardFinder;
-import com.webDevelopment.solid.useCases.BookManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FindBookCardController {
 
     private BookCardFinder bookCardFinder;
-    private BookManager bookManager;
+    private BookService bookService;
     @Autowired
     public FindBookCardController(BookCardFinder bookCardFinder) {
         this.bookCardFinder = bookCardFinder;
@@ -29,10 +29,19 @@ public class FindBookCardController {
     @PostMapping(value = "/createBook", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean createBook(@RequestBody Book book) {
         HttpStatus code = HttpStatus.FORBIDDEN;
+        book = new Book("1984", "George Orwell", 1949, 20000, "un libro muy melo", 203);
         try{
+            System.out.println("llamando servicio");
+
+            book = this.bookService.addBook(book);
+            System.out.println("volviendo del servicio");
 
         }
-        return bookManager.createBook();
+        catch(Exception e)
+        {
+
+        }
+        return true;
     }
     @RequestMapping("/bookCardFinder")
     public String findBookCard() {

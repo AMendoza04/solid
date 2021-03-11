@@ -1,9 +1,7 @@
 package com.webDevelopment.solid.models;
 
 import java.time.Year;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 public class Book {
@@ -14,7 +12,7 @@ public class Book {
     private String description;
     private int pages;
 
-    public Book(String title, String author, Integer publishedYear, Double price, String description, int pages) {
+    public Book(String title, String author, Integer publishedYear, int price, String description, int pages) {
 
         this.title = title;
         this.author = author;
