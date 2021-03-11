@@ -17,7 +17,7 @@ public class BookCardFinder {
     public BookCardFinder(Formatter formatter, Sender sender) {
         this.formatter = formatter;
         this.sender = sender;
-        book = new Book("1984", "George Orwell", 1949, 20d);
+        book = new Book("1984", "George Orwell", 1949, 20d, "un libro muy melo", 203);
     }
 
     public String execute() {
