@@ -12,29 +12,41 @@ public class BookServiceImp implements BookService{
 
     List<Book> books;
     ValidateService validateService;
+
     @Autowired
-    public BookServiceImp(ValidateService validateService)
-    {
-        this.validateService=validateService;
-        books = new ArrayList<>();
+    public BookServiceImp(ValidateService validateService) {
+        this.books = new ArrayList<>();
+        this.validateService = validateService;
     }
+
+
+
     @Override
     public Book addBook(Book book){
+        //System.out.println("Pre try");
         try{
-            System.out.println("pre validar");
+            //System.out.println("pre validar");
             validateService.validateBook(book);
-            System.out.println("post validar");
+            //System.out.println("post validar");
 
-            System.out.println("pre add");
+            //System.out.println("pre add");
             books.add(book);
-            System.out.println(books);
-            System.out.println("post add");
+            imprimirLibros();
+           // System.out.println("post add");
 
         }catch (Exception e)
         {
-            System.out.println("Error validar");
+            System.out.println("Error validar" + e.getMessage());
             //TODO: LOGGER
         }
         return book;
+    }
+
+    public void imprimirLibros()
+    {
+        for(Book b: books)
+        {
+            System.out.println(b.createBookCard());
+        }
     }
 }

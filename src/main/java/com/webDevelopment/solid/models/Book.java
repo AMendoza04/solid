@@ -24,13 +24,15 @@ public class Book {
 
     public String createBookCard()
     {
-        return "The book " + this.title + " has benn written by " + this.author + " and was " +
-                "published in " + this.publishedYear + ". The book's price is " + this.price;
+        return "The book " + this.title + " has been written by " + this.author + " and was " +
+                "published on " + this.publishedYear + ". The book's price is " + this.price;
     }
 
     public List<Integer> selfValidation() {
         List<Integer> validationList = Arrays.asList(1,1,1,1,1);
-
+        //Para elimninar
+        //System.out.println(createBookCard());
+        //raninmile
         if(this.title.length() < 5 || this.title.length() > 100)
         {
             validationList.set(0,0);

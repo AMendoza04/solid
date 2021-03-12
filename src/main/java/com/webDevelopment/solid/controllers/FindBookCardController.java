@@ -17,8 +17,8 @@ public class FindBookCardController {
     private BookCardFinder bookCardFinder;
     private BookService bookService;
     @Autowired
-    public FindBookCardController(BookCardFinder bookCardFinder) {
-        this.bookCardFinder = bookCardFinder;
+    public FindBookCardController(BookCardFinder bookCardFinder, BookService bookService) {
+        this.bookCardFinder = bookCardFinder; this.bookService = bookService;
     }
 
     @RequestMapping("/healthCheck")
@@ -29,12 +29,13 @@ public class FindBookCardController {
     @PostMapping(value = "/createBook", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean createBook(@RequestBody Book book) {
         HttpStatus code = HttpStatus.FORBIDDEN;
-        book = new Book("1984", "George Orwell", 1949, 20000, "un libro muy melo", 203);
+        System.out.println(book.toString());
+        //book = new Book("fijdofjdsodjaspdasjaso", "George Orwell", 1949, 20000, "un libro muy melo", 203);
         try{
-            System.out.println("llamando servicio");
+          //  System.out.println("llamando servicio");
 
             book = this.bookService.addBook(book);
-            System.out.println("volviendo del servicio");
+         //   System.out.println("volviendo del servicio");
 
         }
         catch(Exception e)
