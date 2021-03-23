@@ -27,7 +27,6 @@ public class Book {
         return "The book " + this.title + " has been written by " + this.author + " and was " +
                 "published on " + this.publishedYear + ". The book's price is " + this.price;
     }
-
     public List<Integer> selfValidation() {
         List<Integer> validationList = Arrays.asList(1,1,1,1,1);
         //Para elimninar
@@ -56,5 +55,53 @@ public class Book {
             validationList.set(0,0);
         }
         return validationList;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Integer getPublishedYear() {
+        return publishedYear;
+    }
+
+    public void setPublishedYear(Integer publishedYear) {
+        this.publishedYear = publishedYear;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
     }
 }

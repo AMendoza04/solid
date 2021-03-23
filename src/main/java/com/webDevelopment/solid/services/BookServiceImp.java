@@ -42,6 +42,20 @@ public class BookServiceImp implements BookService{
         return book;
     }
 
+    @Override
+    public List<Book> getBooksbyAuth(String authName) {
+        List<Book> myBooks = new ArrayList<>();
+
+        for(Book b : books)
+        {
+            if(b.getAuthor().contains(authName))
+            {
+                myBooks.add(b);
+            }
+        }
+        return myBooks;
+    }
+
     public void imprimirLibros()
     {
         for(Book b: books)
