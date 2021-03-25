@@ -48,7 +48,7 @@ public class BookServiceImp implements BookService{
 
         for(Book b : books)
         {
-            if(b.getAuthor().contains(authName))
+            if(b.getAuthor().toUpperCase().contains(authName.toUpperCase()))
             {
                 myBooks.add(b);
             }
