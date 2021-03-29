@@ -56,6 +56,17 @@ public class BookServiceImp implements BookService{
         return myBooks;
     }
 
+    @Override
+    public Book getBookDetails(String bookTitle) {
+
+        for( Book b : this.books)
+        {
+            if(b.getTitle().toUpperCase().equals(bookTitle.toUpperCase()))
+                return b;
+        }
+        return null;
+    }
+
     public void imprimirLibros()
     {
         for(Book b: books)

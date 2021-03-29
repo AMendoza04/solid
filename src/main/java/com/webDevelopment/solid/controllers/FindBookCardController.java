@@ -36,7 +36,20 @@ public class FindBookCardController {
         return books;//ResponseEntity.status(codigo).body(products);
 
     }
+    @GetMapping(value = "/bookDetails/{bookTitle}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public Book bookDetails(@PathVariable("bookTitle") String bookTitle)
+    {
+        Book b = null;
+        try
+        {
+            b = this.bookService.getBookDetails( bookTitle );
 
+        }catch (Exception e)
+        {
+
+        }
+        return b;
+    }
     @PostMapping(value = "/createBook", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean createBook(@RequestBody Book book) {
         HttpStatus code = HttpStatus.FORBIDDEN;

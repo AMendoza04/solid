@@ -9,4 +9,6 @@ import java.util.List;
 public interface BookService {
     public Book addBook(Book book);
     public List<Book> getBooksbyAuth(String authName);
+
+    Book getBookDetails(String bookTitle);
 }
