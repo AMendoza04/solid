@@ -50,8 +50,8 @@ public class FindBookCardController {
         }
         return b;
     }
-    @PostMapping(value = "/createBook", produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean createBook(@RequestBody Book book) {
+    @PostMapping(value = "/createBook")
+    public void createBook(@RequestBody Book book) {
         HttpStatus code = HttpStatus.FORBIDDEN;
         System.out.println(book.toString());
         try{
@@ -63,6 +63,5 @@ public class FindBookCardController {
         {
 
         }
-        return true;
     }
 }

@@ -57,6 +57,7 @@ public class Book {
         return validationList;
     }
 
+
     public String getTitle() {
         return title;
     }

@@ -58,7 +58,7 @@ public class BookServiceImp implements BookService{
 
     @Override
     public Book getBookDetails(String bookTitle) {
-
+        bookTitle.replace("%20", " ");
         for( Book b : this.books)
         {
             if(b.getTitle().toUpperCase().equals(bookTitle.toUpperCase()))
