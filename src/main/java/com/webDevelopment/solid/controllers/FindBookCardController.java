@@ -34,8 +34,8 @@ public class FindBookCardController {
             LOGGER.error("ProductController.getProducts Cause: " + e.getMessage());
         }
         return books;//ResponseEntity.status(codigo).body(products);
-
     }
+
     @GetMapping(value = "/bookDetails/{bookTitle}",produces = MediaType.APPLICATION_JSON_VALUE)
     public Book bookDetails(@PathVariable("bookTitle") String bookTitle)
     {

@@ -23,16 +23,12 @@ public class BookServiceImp implements BookService{
 
     @Override
     public Book addBook(Book book){
-        //System.out.println("Pre try");
-        try{
-            //System.out.println("pre validar");
-            validateService.validateBook(book);
-            //System.out.println("post validar");
 
-            //System.out.println("pre add");
+        try{
+            validateService.validateBook(book);
+
             books.add(book);
             imprimirLibros();
-           // System.out.println("post add");
 
         }catch (Exception e)
         {
