@@ -1,9 +1,7 @@
 package com.webDevelopment.solid.models;
 
 import java.time.Year;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 public class Book {
@@ -14,7 +12,7 @@ public class Book {
     private String description;
     private int pages;
 
-    public Book(String title, String author, Integer publishedYear, Double price, String description, int pages) {
+    public Book(String title, String author, Integer publishedYear, int price, String description, int pages) {
 
         this.title = title;
         this.author = author;
@@ -26,13 +24,14 @@ public class Book {
 
     public String createBookCard()
     {
-        return "The book " + this.title + " has benn written by " + this.author + " and was " +
-                "published in " + this.publishedYear + ". The book's price is " + this.price;
+        return "The book " + this.title + " has been written by " + this.author + " and was " +
+                "published on " + this.publishedYear + ". The book's price is " + this.price;
     }
-
     public List<Integer> selfValidation() {
         List<Integer> validationList = Arrays.asList(1,1,1,1,1);
-
+        //Para elimninar
+        //System.out.println(createBookCard());
+        //raninmile
         if(this.title.length() < 5 || this.title.length() > 100)
         {
             validationList.set(0,0);
@@ -57,4 +56,23 @@ public class Book {
         }
         return validationList;
     }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+
 }

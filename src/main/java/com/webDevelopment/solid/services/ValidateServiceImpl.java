@@ -11,15 +11,16 @@ public class ValidateServiceImpl implements ValidateService{
     public void validateBook(Book book) throws Exception {
 
         List<Integer> validationList = book.selfValidation();
-        String[] errores = {"title ", "description", "price","author", "year"};
+        String[] errors = {"title ", "description", "price","author", "year"};
         String message = "";
         boolean flag = false;
         for(int i = 0 ; i < validationList.size(); ++i)
         {
             if(validationList.get(i) == 0)
             {
+                System.out.println(errors[i]);
                 flag = true;
-                message = message + " " + errores[i];
+                message = message + " " + errors[i];
             }
         }
         if(flag)

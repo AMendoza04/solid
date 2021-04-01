@@ -1,8 +1,10 @@
 package com.webDevelopment.solid.services;
 
 import com.webDevelopment.solid.models.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -10,14 +12,62 @@ public class BookServiceImp implements BookService{
 
     List<Book> books;
     ValidateService validateService;
+
+    @Autowired
+    public BookServiceImp(ValidateService validateService) {
+        this.books = new ArrayList<>();
+        this.validateService = validateService;
+    }
+
+
+
     @Override
-    public void addBook(Book book){
+    public Book addBook(Book book){
+
         try{
             validateService.validateBook(book);
+
             books.add(book);
+            imprimirLibros();
+
         }catch (Exception e)
         {
+            System.out.println("Error validar" + e.getMessage());
             //TODO: LOGGER
+        }
+        return book;
+    }
+
+    @Override
+    public List<Book> getBooksbyAuth(String authName) {
+        List<Book> myBooks = new ArrayList<>();
+
+        for(Book b : books)
+        {
+            if(b.getAuthor().toUpperCase().contains(authName.toUpperCase()))
+            {
+                myBooks.add(b);
+            }
+        }
+        return myBooks;
+    }
+
+    @Override
+    public Book getBookDetails(String bookTitle) {
+        bookTitle.replace("%20", " ");
+        for( Book b : this.books)
+        {
+            if(b.getTitle().toUpperCase().equals(bookTitle.toUpperCase()))
+                return b;
+        }
+        return null;
+    }
+
+    public void imprimirLibros()
+    {
+        for(Book b: books)
+        {
+            System.out.println(b.createBookCard());
         }
     }
 }

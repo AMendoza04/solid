@@ -1,41 +1,67 @@
 package com.webDevelopment.solid.controllers;
 
 import com.webDevelopment.solid.models.Book;
-import com.webDevelopment.solid.useCases.BookCardFinder;
-import com.webDevelopment.solid.useCases.BookManager;
+import com.webDevelopment.solid.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static com.webDevelopment.solid.SolidApplication.LOGGER;
 
 @RestController
 public class FindBookCardController {
 
-    private BookCardFinder bookCardFinder;
-    private BookManager bookManager;
+    private BookService bookService;
     @Autowired
-    public FindBookCardController(BookCardFinder bookCardFinder) {
-        this.bookCardFinder = bookCardFinder;
+    public FindBookCardController(BookService bookService) {
+       this.bookService = bookService;
     }
 
-    @RequestMapping("/healthCheck")
-    public String healthCkeck() {
-        return "Server up";
-    }
-
-    @PostMapping(value = "/createBook", produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean createBook(@RequestBody Book book) {
+    @GetMapping(value = "/bookList/{author}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Book> getBookbyAuth(@PathVariable("author") String authorName)
+    {
+        System.out.println(authorName);
+        List<Book> books = null;
         HttpStatus code = HttpStatus.FORBIDDEN;
-        try{
+        try {
+            books = this.bookService.getBooksbyAuth(authorName);
+            code = HttpStatus.OK;
+        }
+        catch (Exception e) {
+            LOGGER.error("ProductController.getProducts Cause: " + e.getMessage());
+        }
+        return books;//ResponseEntity.status(codigo).body(products);
+    }
+
+    @GetMapping(value = "/bookDetails/{bookTitle}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public Book bookDetails(@PathVariable("bookTitle") String bookTitle)
+    {
+        Book b = null;
+        try
+        {
+            b = this.bookService.getBookDetails( bookTitle );
+
+        }catch (Exception e)
+        {
 
         }
-        return bookManager.createBook();
+        return b;
     }
-    @RequestMapping("/bookCardFinder")
-    public String findBookCard() {
-        return bookCardFinder.execute();
+    @PostMapping(value = "/createBook")
+    public void createBook(@RequestBody Book book) {
+        HttpStatus code = HttpStatus.FORBIDDEN;
+        System.out.println(book.toString());
+        try{
+
+            book = this.bookService.addBook(book);
+
+        }
+        catch(Exception e)
+        {
+
+        }
     }
 }
