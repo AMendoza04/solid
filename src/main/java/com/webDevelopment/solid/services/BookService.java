@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface BookService {
     public Book addBook(Book book);
-    public List<Book> getBooksbyAuth(String authName);
+    public String getBooksbyAuth(String authName);
 
-    Book getBookDetails(String bookTitle);
+    String getBookDetails(String bookTitle);
 }

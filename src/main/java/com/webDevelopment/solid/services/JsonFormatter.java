@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class    JsonFormatter implements Formatter {
+public class JsonFormatter implements Formatter {
     @Override
     public String Format(String message) {
         return "{ 'bookCard' : '" + message + "' }";
@@ -19,6 +19,6 @@ public class    JsonFormatter implements Formatter {
 
     @Override
     public String bookDetails(Book book) {
-        return null;
+        return book.bookDetail();
     }
 }

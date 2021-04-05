@@ -18,7 +18,6 @@ public class ValidateServiceImpl implements ValidateService{
         {
             if(validationList.get(i) == 0)
             {
-                System.out.println(errors[i]);
                 flag = true;
                 message = message + " " + errors[i];
             }

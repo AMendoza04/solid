@@ -29,9 +29,6 @@ public class Book {
     }
     public List<Integer> selfValidation() {
         List<Integer> validationList = Arrays.asList(1,1,1,1,1);
-        //Para elimninar
-        //System.out.println(createBookCard());
-        //raninmile
         if(this.title.length() < 5 || this.title.length() > 100)
         {
             validationList.set(0,0);
@@ -58,6 +55,8 @@ public class Book {
     }
 
 
+
+
     public String getTitle() {
         return title;
     }
@@ -70,9 +69,20 @@ public class Book {
         return author;
     }
 
+
+
+
+
     public void setAuthor(String author) {
         this.author = author;
     }
 
 
+    public String bookDetail() {
+        return "{"+"\"description\":"+"\""+description+"\","
+                +"\"price\":"+price+","
+                +"\"publishedYear\":"+publishedYear+","
+                +"\"random_pagesnumber\":"+pages
+                +"}";
+    }
 }

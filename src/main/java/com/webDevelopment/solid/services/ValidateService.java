@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ValidateService {
 
-    public  void validateBook( Book book) throws Exception;
+    public void validateBook( Book book) throws Exception;
 }

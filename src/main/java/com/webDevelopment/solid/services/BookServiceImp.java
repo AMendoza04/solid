@@ -12,7 +12,6 @@ public class BookServiceImp implements BookService{
 
     List<Book> books;
     ValidateService validateService;
-
     @Autowired
     public BookServiceImp(ValidateService validateService) {
         this.books = new ArrayList<>();
@@ -39,26 +38,35 @@ public class BookServiceImp implements BookService{
     }
 
     @Override
-    public List<Book> getBooksbyAuth(String authName) {
-        List<Book> myBooks = new ArrayList<>();
+    public String getBooksbyAuth(String authName) {
+        List<Book> bookByAuthor = new ArrayList<>();
 
         for(Book b : books)
         {
             if(b.getAuthor().toUpperCase().contains(authName.toUpperCase()))
             {
-                myBooks.add(b);
+                bookByAuthor.add(b);
             }
         }
-        return myBooks;
+       return ""; //return booksJSONFormatted(bookByAuthor);
+    }
+
+    private List<Book> booksJSONFormatted(List<Book> bookByAuthor) {
+        for(Book b : books)
+        {
+        }
+        return null;
     }
 
     @Override
-    public Book getBookDetails(String bookTitle) {
+    public String getBookDetails(String bookTitle) {
         bookTitle.replace("%20", " ");
-        for( Book b : this.books)
+        for( Book book : this.books)
         {
-            if(b.getTitle().toUpperCase().equals(bookTitle.toUpperCase()))
-                return b;
+            if(book.getTitle().contains(bookTitle))
+            {
+                return book.bookDetail();
+            }
         }
         return null;
     }

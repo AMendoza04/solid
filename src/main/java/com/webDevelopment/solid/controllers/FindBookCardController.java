@@ -20,48 +20,47 @@ public class FindBookCardController {
        this.bookService = bookService;
     }
 
-    @GetMapping(value = "/bookList/{author}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Book> getBookbyAuth(@PathVariable("author") String authorName)
-    {
-        System.out.println(authorName);
-        List<Book> books = null;
-        HttpStatus code = HttpStatus.FORBIDDEN;
-        try {
-            books = this.bookService.getBooksbyAuth(authorName);
-            code = HttpStatus.OK;
-        }
-        catch (Exception e) {
-            LOGGER.error("ProductController.getProducts Cause: " + e.getMessage());
-        }
-        return books;//ResponseEntity.status(codigo).body(products);
-    }
-
-    @GetMapping(value = "/bookDetails/{bookTitle}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public Book bookDetails(@PathVariable("bookTitle") String bookTitle)
-    {
-        Book b = null;
-        try
-        {
-            b = this.bookService.getBookDetails( bookTitle );
-
-        }catch (Exception e)
-        {
-
-        }
-        return b;
-    }
     @PostMapping(value = "/createBook")
-    public void createBook(@RequestBody Book book) {
+    public void createBook(@RequestBody Book book) throws Exception {
         HttpStatus code = HttpStatus.FORBIDDEN;
         System.out.println(book.toString());
         try{
-
             book = this.bookService.addBook(book);
-
         }
         catch(Exception e)
         {
-
+            throw new Exception("On create book, Cause: " + e.getMessage());
         }
+    }
+
+    @GetMapping(value = "/bookList/{author}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getBookbyAuth(@PathVariable("author") String authorName)
+    {
+        String booksByAuthorResponse = null;
+        try {
+            booksByAuthorResponse = this.bookService.getBooksbyAuth(authorName);
+        }
+        catch (Exception e) {
+            LOGGER.error("BookController.getBookbyAuth Cause: " + e.getMessage());
+        }
+        return booksByAuthorResponse;
+    }
+
+    @GetMapping(value = "/bookDetails/{bookTitle}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public String bookDetails(@PathVariable("bookTitle") String bookTitle)
+    {
+        String bookDetail = null;
+        try
+        {
+            bookDetail = this.bookService.getBookDetails( bookTitle );
+            if(bookDetail!=null){
+                return bookDetail;
+            }
+
+        }catch (Exception e)
+        {
+            LOGGER.error("BookController.bookDetails Cause: " + e.getMessage());
+        }
+        return null;
     }
 }
