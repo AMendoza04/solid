@@ -25,14 +25,11 @@ public class BookServiceImp implements BookService{
 
         try{
             validateService.validateBook(book);
-
             books.add(book);
             imprimirLibros();
-
         }catch (Exception e)
         {
             System.out.println("Error validar" + e.getMessage());
-            //TODO: LOGGER
         }
         return book;
     }
@@ -48,14 +45,20 @@ public class BookServiceImp implements BookService{
                 bookByAuthor.add(b);
             }
         }
-       return ""; //return booksJSONFormatted(bookByAuthor);
+       return booksJSONFormatted(bookByAuthor);
     }
 
-    private List<Book> booksJSONFormatted(List<Book> bookByAuthor) {
-        for(Book b : books)
+    private String booksJSONFormatted(List<Book> bookByAuthor) {
+        String formattedResponse="{";
+        for(int i=0;i<bookByAuthor.size();i++)
         {
+            if(i==bookByAuthor.size()-1)
+                formattedResponse+=books.get(i).bookByAuthorDetail();
+            else
+                formattedResponse+=books.get(i).bookByAuthorDetail()+",";
         }
-        return null;
+        formattedResponse+="}";
+        return formattedResponse;
     }
 
     @Override

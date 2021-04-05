@@ -35,21 +35,21 @@ public class Book {
         }
         if(this.description.length() > 200)
         {
-            validationList.set(0,0);
+            validationList.set(1,0);
         }
         if(this.price < 0 || this.price < 10000)
         {
-            validationList.set(0,0);
+            validationList.set(2,0);
         }
         String[] authorName = this.author.split(" ");
         if(2 != authorName.length )
         {
-            validationList.set(0,0);
+            validationList.set(3,0);
         }
 
         if(this.publishedYear > Year.now().getValue() || Integer.toString(this.publishedYear).length() != 4)
         {
-            validationList.set(0,0);
+            validationList.set(4,0);
         }
         return validationList;
     }
@@ -83,6 +83,12 @@ public class Book {
                 +"\"price\":"+price+","
                 +"\"publishedYear\":"+publishedYear+","
                 +"\"random_pagesnumber\":"+pages
+                +"}";
+    }
+
+    public String bookByAuthorDetail() {
+        return "{"+"\"title\":"+"\""+title+"\","
+                +"\"author\":"+"\""+author+"\","
                 +"}";
     }
 }
