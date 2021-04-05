@@ -12,10 +12,13 @@ public class BookServiceImp implements BookService{
 
     List<Book> books;
     ValidateService validateService;
+    Formatter formatter;
+
     @Autowired
-    public BookServiceImp(ValidateService validateService) {
+    public BookServiceImp(ValidateService validateService, Formatter formatter) {
         this.books = new ArrayList<>();
         this.validateService = validateService;
+        this.formatter = formatter;
     }
 
 
@@ -48,15 +51,10 @@ public class BookServiceImp implements BookService{
                 bookByAuthor.add(b);
             }
         }
-       return ""; //return booksJSONFormatted(bookByAuthor);
+        return formatter.authorFormat(bookByAuthor);
     }
 
-    private List<Book> booksJSONFormatted(List<Book> bookByAuthor) {
-        for(Book b : books)
-        {
-        }
-        return null;
-    }
+
 
     @Override
     public String getBookDetails(String bookTitle) {
@@ -65,7 +63,7 @@ public class BookServiceImp implements BookService{
         {
             if(book.getTitle().contains(bookTitle))
             {
-                return book.bookDetail();
+                return formatter.bookDetails(book);
             }
         }
         return null;
